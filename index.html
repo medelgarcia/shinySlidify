@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>R shiny app</title>
+  <meta charset="utf-8">
+  <meta name="description" content="R shiny app">
+  <meta name="author" content="Juan M. Medel">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>R shiny app</h1>
+    <h2>printing some functions</h2>
+    <p>Juan M. Medel<br/>R student</p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Index</h2>
+  </hgroup>
+  <article data-timings="">
+    <ol>
+<li>What is shiny?</li>
+<li>ur.R and server.R files</li>
+<li>Example of use: selecting sin(x)</li>
+<li>Improving the application: Future extension</li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>What is shiny?</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><strong>Shiny is a new way to build web applications with R.</strong>
+#For additional information on the data, please refer to: <a href="http://shiny.rstudio.com/">http://shiny.rstudio.com/</a>   </p>
+
+<ul>
+<li>ui.R file: It is used to set the appearance or interface in the application:</li>
+</ul>
+
+<pre><code class="r">shinyUI(
+    pageWithSidebar(
+        headerPanel(&quot;Graphic these functions&quot;),
+        sidebarPanel(h2(&#39;select the function to print&#39;)) # Add items input
+        mainPanel(h2(&#39;The...&#39;),verbatimTextOutput(&quot;funcion&quot;))) #Add items output
+</code></pre>
+
+<ul>
+<li>server.R file: It is used to make the calculation needed:</li>
+</ul>
+
+<pre><code class="r">shinyServer(function(input, output) {
+        output$funcion &lt;- renderPrint({input$rb})
+        output$canvas &lt;- renderPlot({plot(x, y = (input$k)*exp(-x*input$t))})}) #Add plot
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Example of use</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>The grafical output that should be printed is shown here:<br>
+<img src="ExampleOfUse.png" alt="alt text" title="Title"></p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="class" id="id" style="background:;">
+  <hgroup>
+    <h2>Futures improvements:</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Change the radio button by checkable button in order to construct more complex functions by multipling the functions availables. For example \(e^(-x) · sin(x)\)</li>
+<li>The expected output for t = 0.25 and k = 1 will be like this:</li>
+</ul>
+
+<pre><code class="r">x &lt;- seq(from=0.05, to=6*pi, by=0.05)
+plot(x=x, y = 1*exp(-x/4)*sin(x), type =&quot;l&quot;, lwd = 5)
+</code></pre>
+
+<p><img src="assets/fig/printableImprove.png" alt="plot of chunk printableImprove"> </p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Index'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='What is shiny?'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Example of use'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Futures improvements:'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
